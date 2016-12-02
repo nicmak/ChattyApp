@@ -23,6 +23,10 @@ nav h1 {
   margin: 0;
 }
 
+nav div {
+  float:right;
+}
+
 #message-list {
   height: calc(100vh - 131px);
   padding: 16px 8px;}
