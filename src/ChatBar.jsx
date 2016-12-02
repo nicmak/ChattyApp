@@ -22,19 +22,25 @@ handleContentChange = (event) => {
 
 handleSubmit = (event) => {
   if (event.key == "Enter"){
+    console.log("Handlesubmit Event target",event.target);
     this.props.upAction(this.state.value.username,this.state.value.content)
+    this.props.nameChange(this.state.value.username)
+    //Sends username and content into server and stores into App's State
+    // this.props.nameChange(this.state.value.username);
     event.preventDefault();
   }
   // event.preventDefault;
 }
 
-handleSubmitNameChange = (event) => {
-  if (event.key == "Enter"){
-    this.props.upAction(this.state.value.username,this.state.value.content)
-    event.preventDefault();
-  }
-  // event.preventDefault;
-}
+
+
+// handleSubmitNameChange = (event) => {
+//   if (event.key == "Enter"){
+//     console.log("HandleSubmitNameChange",event.target)
+//     event.preventDefault();
+//   }
+//   // event.preventDefault;
+// }
 
 
   render() { //returns HTML that will get displayed in the browser
@@ -43,11 +49,12 @@ handleSubmitNameChange = (event) => {
     const { currentUser } = this.props;
     return (
       <footer>
-
+        <form onKeyDown={this.handleSubmit} >
           <input
             id="username"
             value={this.state.value.username}
             onChange={this.handleNameChange}
+            // onKeyDown={this.handleSubmit}
             type="text"
             placeholder={currentUser}
           />
@@ -55,10 +62,10 @@ handleSubmitNameChange = (event) => {
             id="new-message"
             value={this.state.value.content}
             onChange={this.handleContentChange}
-            onKeyDown={this.handleSubmit}
+            // onKeyDown={this.handleSubmit}
             type="text"
             placeholder="Type a message and hit ENTER" />
-
+          </form>
       </footer>
     );
   }

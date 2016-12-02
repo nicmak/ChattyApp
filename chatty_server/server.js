@@ -25,19 +25,33 @@ const wss = new SocketServer({ server });
 // the ws parameter in the callback.
 wss.on('connection', (ws) => {
   console.log('Client connected');
-  let userinitialNumber = wss.clients.length.toString();
+  let userinitialNumber = wss.clients.length
+  let numberObject = {type:"userCount", number:userinitialNumber}
   wss.clients.forEach((client) => {
-    client.send(userinitialNumber)
+    client.send(JSON.stringify(numberObject));
   })
   ws.on('message', (data) => {
     data = JSON.parse(data);
-    data.id = uuid()
-    let stringified = JSON.stringify(data);
-    console.log("Data",stringified);
+    switch (data.type) {
+      case "postMessage":
+      data.id = uuid()
+      data.type = "incomingMessage"
       wss.clients.forEach((client) => {
-      console.log("Sending Stuff to client");
-      client.send(stringified);
-    });
+        console.log("Sending incomingMessage to client");
+        client.send(JSON.stringify(data));
+      });
+        break;
+      case "postNotification":
+      data.type = "incomingNotification"
+      wss.clients.forEach((client) => {
+        console.log("Sending incomingNotification to client");
+        client.send(JSON.stringify(data));
+
+      });
+        break;
+        default:
+          throw new Error("Server:Unknown event type", data.type)
+    }
   })
   // Set up a callback for when a client closes the socket. This usually means they closed their browser.
   ws.on('close', () => {

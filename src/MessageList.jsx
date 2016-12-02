@@ -1,4 +1,4 @@
-import React, {Component} from 'react'; //this making react.component
+  import React, {Component} from 'react'; //this making react.component
 import Message from './Message.jsx';
 class MessageList extends Component {  //React.component.MessageList
   render() { //returns HTML that will get displayed in the browser
@@ -13,7 +13,7 @@ class MessageList extends Component {  //React.component.MessageList
           })
         }
         <div className="message system">
-          {/* Anonymous1 changed their name to nomnom. */}
+          {this.props.changeUser}
         </div>
       </div>
     );
