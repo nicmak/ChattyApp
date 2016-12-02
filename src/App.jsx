@@ -35,15 +35,11 @@ class App extends Component {
 
 
     upAction = (username,content) => {
-    let serverMessage = {type:"postMessage",username:username,content:content};
-    //Client is sending post message to server now...
-    this.socket.send(JSON.stringify(serverMessage));
-    // this.socket.onmessage = (event) => {
-    //   let objectData = JSON.parse(event.data)
-    //   let new2message=this.state.messages.concat(objectData);
-    //   this.setState({messages:new2message});
-    // }
-  }
+      if (username!="" && content!="") {
+        let serverMessage = {type:"postMessage",username:username,content:content};
+        this.socket.send(JSON.stringify(serverMessage));
+      }
+    }
 
   render() { //returns HTML that will get displayed in the browser
     console.log("Rendering <App/>");

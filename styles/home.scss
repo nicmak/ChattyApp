@@ -13,14 +13,16 @@ html, body {
 }
 
 nav {
-  height: 40px;
+  height: 80px;
   padding: 8px;
   border-bottom: 1px
   solid black;
-  background-color: tomato;
+  background-color: #43A047;
 }
 nav h1 {
-  margin: 0;
+  display: flex;
+  justify-content: center;
+  font-size: 45px;
 }
 
 nav div {
@@ -56,10 +58,10 @@ nav div {
  }
 
 footer {
-  height: 41px;
+  height: 80px;
   border-top: 1px
   solid black;
-  background-color: tomato;
+  background-color: #43A047;
   display: flex;
   align-items: center;
 }
@@ -68,6 +70,7 @@ footer input {
   margin: 4px;
   height: 20px;
   padding: 4px 8px;
+  size:30px
 }
 footer #username {
   flex: 3;

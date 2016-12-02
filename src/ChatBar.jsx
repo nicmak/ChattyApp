@@ -29,23 +29,8 @@ handleSubmit = (event) => {
     // this.props.nameChange(this.state.value.username);
     event.preventDefault();
   }
-  // event.preventDefault;
 }
-
-
-
-// handleSubmitNameChange = (event) => {
-//   if (event.key == "Enter"){
-//     console.log("HandleSubmitNameChange",event.target)
-//     event.preventDefault();
-//   }
-//   // event.preventDefault;
-// }
-
-
   render() { //returns HTML that will get displayed in the browser
-    // console.log("Rendering <Chatbar/>");
-    // console.log(this.state.value)
     const { currentUser } = this.props;
     return (
       <footer>
@@ -54,7 +39,6 @@ handleSubmit = (event) => {
             id="username"
             value={this.state.value.username}
             onChange={this.handleNameChange}
-            // onKeyDown={this.handleSubmit}
             type="text"
             placeholder={currentUser}
           />
@@ -62,7 +46,6 @@ handleSubmit = (event) => {
             id="new-message"
             value={this.state.value.content}
             onChange={this.handleContentChange}
-            // onKeyDown={this.handleSubmit}
             type="text"
             placeholder="Type a message and hit ENTER" />
           </form>

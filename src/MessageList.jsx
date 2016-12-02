@@ -5,16 +5,17 @@ class MessageList extends Component {  //React.component.MessageList
     console.log("Rendering <MessageList/>");
     return (
       <div id="message-list">
-        {
-          this.props.messages.map((message)=> {
-            return (
-              <Message key={message.id} message={message}/>
-            )
-          })
-        }
         <div className="message system">
           {this.props.changeUser}
         </div>
+        {
+
+          this.props.messages.map((message)=> {
+            return (
+              <Message key={message.id} message={message} userStatement={this.props.changeUser}/>
+            )
+          })
+        }
       </div>
     );
 
