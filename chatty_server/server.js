@@ -15,49 +15,51 @@ const wss = new SocketServer({ server });
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
 
-// const sendUserCount = (number) => {
-//   let numberObject =
-//
-// }
-
-
-
-wss.on('connection', (ws) => {
-  console.log('Client connected');
-  let userinitialNumber = wss.clients.length
-  let numberObject = {type:"userCount", number:userinitialNumber}
+//broadCaster Function...Will send data from server to All clients through forEach Loop, because
+// wss.clients is an array...data will be stringified in order to move from server to client.
+let broadCaster = (data) => {
   wss.clients.forEach((client) => {
-    client.send(JSON.stringify(numberObject));
+    client.send(JSON.stringify(data));
   })
-  ws.on('message', (data) => {
-    data = JSON.parse(data  );
-    switch (data.type) {
-      case "postMessage":
-      data.id = uuid()
-      data.type = "incomingMessage"
-      wss.clients.forEach((client) => {
-        console.log("Sending incomingMessage to client");
-        client.send(JSON.stringify(data));
-      });
-        break;
-      case "postNotification":
-      data.type = "incomingNotification"
-      wss.clients.forEach((client) => {
-        console.log("Sending incomingNotification to client");
-        client.send(JSON.stringify(data));
+}
+//userTracker Function...it will take number of clients as input and store them
+// inside an object, which will then be passed into broadCaster function
+let userTracker = (clientLength) => {
+  let numberObject = {type:"userCount", number:clientLength}
+  broadCaster(numberObject)
+}
 
-      });
-        break;
-        default:
-          throw new Error("Server:Unknown event type", data.type)
+//This is where the connection between client and server occurs
+wss.on('connection', (ws) => {
+  userTracker(wss.clients.length)
+
+//This is where server is receiving data from clients
+  ws.on('message', (data) => {
+    data = JSON.parse(data);
+    //We are converting the data from string to object, because it would allow
+    //us to easily input new keys and values. i.e. type : incomingMessage
+
+    //Switch condition is required inorder to determine whether server is broadcasting
+    // either a message or a notification.
+    switch (data.type) {
+      //This case is broadCasting a message the user wrote
+      case "postMessage":
+        data.id = uuid //Unique ID is inputted into data object here, this will make every message unique.
+        data.type = "incomingMessage" //Here we are converting the data.type from postMessage to incomingMessage
+        broadCaster(data);
+          break;
+      //Case: Server is receiving a notification from client
+      case "postNotification":
+        data.type = "incomingNotification" //BroadCasting message to clients as "incomingNotification"
+        broadCaster(data);
+          break;
+
+      default:
+        throw new Error("Server:Unknown event type", data.type)
     }
   })
-  // Set up a callback for when a client closes the socket. This usually means they closed their browser.
+//This is where the connection between client and sever closes, followed by a event function
   ws.on('close', () => {
-    console.log('Client disconnected')
-    let userFinalNumber = wss.clients.length.toString();
-    wss.clients.forEach((client) => {
-      client.send(userFinalNumber);
-    });
+    userTracker(wss.clients.length)
   });
 });

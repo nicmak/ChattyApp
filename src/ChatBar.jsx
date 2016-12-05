@@ -40,7 +40,7 @@ handleSubmit = (event) => {
             value={this.state.value.username}
             onChange={this.handleNameChange}
             type="text"
-            placeholder={currentUser}
+            placeholder="Enter Username"
           />
           <input
             id="new-message"

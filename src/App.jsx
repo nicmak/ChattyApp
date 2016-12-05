@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import MessageList from './MessageList.jsx';
 import ChatBar from './ChatBar.jsx';
 import Nav from './Nav'
-// > var anotherString=stringified.replace('{','"{"id":"1",')
 class App extends Component {
   constructor(props){
     super(props);
@@ -13,41 +12,43 @@ class App extends Component {
       changeUser:""
     }
   }
-
-  genID = () => {
-    return Math.floor(Math.random()*1000)
-  }
-
+    genID = () => {
+      return Math.floor(Math.random()*1000)
+    }
 //nameChange function is used so that on ChatBar, when the username is passed into
 //nameChange, the username will be compared with currentUser currently stored in App.jsx state's currentUser:name
     nameChange = (username) => {
-    let currentUser = this.state.currentUser
-    if (username != currentUser && currentUser != "") {
-      let serverMessage = {type:"postNotification",content:`${currentUser} has changed their name to ${username}`}
-      this.socket.send(JSON.stringify(serverMessage))
-      this.setState({currentUser:username})      // let serverMessage = {type:"postNotification",content:`{currentUser} has changed their name to {username}`}
-      // currentUser = username //This would set the state.CurrentUser to the new Userinput
-    } else {
-        this.setState({currentUser:username})
-        console.log("username is the same");
-      }
+      let currentUser = this.state.currentUser
+      if (username != currentUser && currentUser != "") {
+        let serverMessage = {type:"postNotification",content:`${currentUser} has changed their name to ${username}`}
+        this.socket.send(JSON.stringify(serverMessage))
+        this.setState({currentUser:username})      
+      } else {
+          this.setState({currentUser:username})
+        }
     }
-
-
     upAction = (username,content) => {
       if (username!="" && content!="") {
         let serverMessage = {type:"postMessage",username:username,content:content};
         this.socket.send(JSON.stringify(serverMessage));
       }
     }
-
   render() { //returns HTML that will get displayed in the browser
     console.log("Rendering <App/>");
     return (
       <div className="wrapper">
-        <Nav userCounts={this.state.userCount}/>
-        <MessageList messages={this.state.messages} changeUser={this.state.changeUser}/>
-        <ChatBar nameChange={this.nameChange} currentUser={this.state.currentUser} upAction={this.upAction}/>
+        <Nav
+          userCounts={this.state.userCount}
+        />
+        <MessageList
+          messages={this.state.messages}
+          changeUser={this.state.changeUser}
+        />
+        <ChatBar
+          nameChange={this.nameChange}
+          currentUser={this.state.currentUser}
+          upAction={this.upAction}
+        />
       </div>
     );
   }

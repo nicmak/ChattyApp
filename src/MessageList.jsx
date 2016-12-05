@@ -12,7 +12,11 @@ class MessageList extends Component {  //React.component.MessageList
 
           this.props.messages.map((message)=> {
             return (
-              <Message key={message.id} message={message} userStatement={this.props.changeUser}/>
+              <Message
+                key={message.id}
+                message={message}
+                userStatement={this.props.changeUser}
+              />
             )
           })
         }
