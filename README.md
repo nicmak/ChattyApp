@@ -1,18 +1,9 @@
-React Boilerplate
+ChattyApp
 =====================
 
 A minimal and light dev environment for ReactJS.
 
 ### Usage
-
-Clone the boilerplate and create your own git repo.
-
-```
-git clone git@github.com:lighthouse-labs/react-simple-boilerplate.git
-git remote rm origin
-git remote add origin [YOUR NEW REPOSITORY]
-# Manually update your package.json file
-```
 
 Install the dependencies and start the server.
 
