@@ -1,6 +1,6 @@
 ChattyApp
 =====================
-This is a project at Lighthouse Labs, where I implemented the use of ReactJS on a messanger application. 
+This is a project at Lighthouse Labs, where I implemented the use of ReactJS and WebSocket on a messanger application. 
 A minimal and light dev environment for ReactJS.
 
 ### Usage
@@ -12,7 +12,7 @@ npm install
 npm start
 open http://localhost:3000
 ```
-*** As well, please open Chatty_server folder to run server-side
+*** As well, please open Chatty_server folder to run Websocket server-side
 ```
 npm install (To install dependencies of Chatty_server
 npm start 
