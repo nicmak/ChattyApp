@@ -1,18 +1,23 @@
 ChattyApp
 =====================
-
+This is a project at Lighthouse Labs, where I implemented the use of ReactJS on a messanger application. 
 A minimal and light dev environment for ReactJS.
 
 ### Usage
 
-Install the dependencies and start the server.
+Install the dependencies and start the client-server.
 
 ```
 npm install
 npm start
 open http://localhost:3000
 ```
-
+*** As well, please open Chatty_server folder to run server-side
+```
+npm install (To install dependencies of Chatty_server
+npm start 
+open http://localhost:5000
+```
 ### Static Files
 
 You can store static files like images, fonts, etc in the `build` folder.
